@@ -1,0 +1,21 @@
+<h1>Browse Categories</h1>
+<div class="row">
+  <%= link_to products_path(:category => "bedroom") do %>
+    <div class="col-lg-4">
+      <%= image_tag "https://www.homelegance.com/wp-content/uploads/2017/03/1968-1__1-750x500.jpg", class: "img-responsive" %>
+      <h4 class="text-center">Bedroom Furniture</h4>
+    </div>
+  <% end %>
+  <%= link_to products_path(:category => "dining") do %>
+    <div class="col-lg-4">
+      <%= image_tag "https://www.homelegance.com/wp-content/uploads/2016/02/586GY-82__11-750x500.jpg", class: "img-responsive" %>
+      <h4 class="text-center">Dining Furniture</h4>
+    </div>
+  <% end %>
+  <%= link_to products_path(:category => "seating") do %>
+    <div class="col-lg-4">
+      <%= image_tag "https://www.homelegance.com/wp-content/uploads/2015/02/8427-3__1-750x500.jpg", class: "img-responsive" %>
+      <h4 class="text-center">Seating</h4>
+    </div>
+  <% end %>
+</div>

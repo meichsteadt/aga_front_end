@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AgaFrontend</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+      <%= yield(:back_location) %>
+      <% if @category %>
+        <h1 class="text-center">Browse <%= @category.capitalize %></h1>
+      <% else %>
+        <h1 class="text-center">Browse Furniture</h1>
+      <% end %>
+      <ul style="list-style: none">
+        <li style="display: inline-block; padding: 10px;">
+          <%= link_to products_path(:category => "dining") do %>Dining<% end %>
+        </li>
+        <li style="display: inline-block; padding: 10px;">
+          <%= link_to products_path(:category => "bedroom") do %>Bedroom<% end %>
+        </li>
+        <li style="display: inline-block; padding: 10px;">
+          <%= link_to products_path(:category => "seating") do %>Seating<% end %>
+        </li>
+      </ul>
+    </header>
+    <div class="container">
+      <%= yield %>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+  <% content_for(:back_location) do %>
+    <%= link_to '/' do %>
+      <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+    <% end %>
+  <% end %>
+  <div id="page-<%= @page %>" class="row product-row">
+    <% @products.each_with_index do |product, index| %>
+      <% if index < (6 * @page.to_i) && index >= (6 * (@page.to_i - 1)) %>
+        <% if product["image"] != "https://www.homelegance.com/wp-content/themes/h2/images/misc/shim.gif" %>
+          <%= link_to product_path(product["number"], category: @category, page: @page) do%>
+            <div class="col-lg-4 product">
+              <div class="image" style="background: url(<%= product["image"] %>); background-size: cover; background-position: center center;"></div>
+              <div class="info">
+                <p><%= product["name"] %></p>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+
+<nav aria-label="Page navigation" class="text-center">
+  <ul class="pagination">
+    <li>
+      <% if @page == '1' %>
+        <%= link_to products_path(page: (@products.length/6).ceil, category: @category) do %>
+          <span aria-hidden="true">&laquo;</span>
+        <% end %>
+      <% else %>
+        <%= link_to products_path(page: (@page.to_i-1), category: @category) do %>
+          <span aria-hidden="true">&laquo;</span>
+        <% end %>
+      <% end %>
+    </li>
+    <% (@products.length/6).ceil.times do |time| %>
+      <li <%if @page.to_i == time+1 %> class="active" <% end %>><%= link_to (time+1), products_path(page: (time+1), category: @category) %></li>
+    <% end %>
+    <li>
+      <% if @page.to_i == (@products.length/6).ceil %>
+        <%= link_to products_path(page: (1), category: @category) do %>
+          <span aria-hidden="true">&raquo;</span>
+        <% end %>
+      <% else %>
+        <%= link_to products_path(page: (@page.to_i+1), category: @category) do %>
+          <span aria-hidden="true">&raquo;</span>
+        <% end %>
+      <% end %>
+    </li>
+  </ul>
+</nav>
