@@ -7,7 +7,7 @@
     <% @products.each_with_index do |product, index| %>
       <% if index < (6 * @page.to_i) && index >= (6 * (@page.to_i - 1)) %>
         <% if product["image"] != "https://www.homelegance.com/wp-content/themes/h2/images/misc/shim.gif" %>
-          <%= link_to product_path(product["number"], category: @category, page: @page) do%>
+          <%= link_to product_path(product["id"], category: @category, page: @page) do%>
             <div class="col-lg-4 product">
               <div class="image" style="background: url(<%= product["image"] %>); background-size: cover; background-position: center center;"></div>
               <div class="info">

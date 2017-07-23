@@ -12,12 +12,13 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.get_product(params[:id])
-    @category = params[:category]
+    @category = @product.category
     @page = params[:page]
     @sum = 0
+    @multiplier = @user["user"][@category + "_mult"]
     if params[:sum]
       @product.product_items.each do |item|
-        @sum = @sum + params[item['number']].to_i * item['price'].to_i
+        @sum = @sum + params[item['number']].to_i * item['price'].to_i * @multiplier
         params[:current_total] = @sum
       end
       respond_to do |format|
@@ -25,8 +26,5 @@ class ProductsController < ApplicationController
         format.js
       end
     end
-  end
-
-  def create
   end
 end

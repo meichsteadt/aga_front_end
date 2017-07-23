@@ -12,7 +12,10 @@ class Product
   end
 
   def self.get_products(category)
-    products = HTTParty.get("http://localhost:3000/#{category}").sort_by {|prod| prod["number"]}
+    if category == nil
+      category = "products"
+    end
+    products = HTTParty.get("http://localhost:3000/#{category}").sort_by {|prod| prod["popularity"]}.reverse!
     returned_products = []
     products.each do |prod|
       if prod["image"] != "https://www.homelegance.com/wp-content/themes/h2/images/misc/shim.gif"

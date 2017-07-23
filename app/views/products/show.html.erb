@@ -20,7 +20,7 @@
 <div class="row">
   <div class="col-lg-8 item-pick">
     <h2 class="text-center">Pick Your Items</h2>
-    <%= form_tag("/products/#{@product.number}", method: "get", remote: true) do |f| %>
+    <%= form_tag("/products/#{@product.id}", method: "get", remote: true) do |f| %>
     <table>
       <tr>
         <th>Item Description</th>
@@ -32,7 +32,7 @@
       <tr>
         <td><%= item["description"] %></td>
         <td><%= item["dimensions"] %></td>
-        <td>$<%= item["price"].to_i %></td>
+        <td><%= number_to_currency(item["price"].to_i * @multiplier) %></td>
         <td>
           <div class="input-field col s12">
             <%= select_tag item["number"], options_for_select([[0,0],[1,1],[2,2],[3,3],[4,4],[5,5],[6,6],[7,7],[8,8]]) %>
@@ -47,6 +47,6 @@
     <% end %>
   </div>
   <div class="col-lg-4">
-    <h2 id="total">Total: $<%= @sum %></h2>
+    <h2 id="total">Total: <%= number_to_currency(@sum) %></h2>
   </div>
 </div>
