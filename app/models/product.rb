@@ -1,5 +1,5 @@
 class Product
-  attr_reader(:number, :name, :description, :image, :category, :product_items, :id)
+  attr_reader(:number, :name, :description, :image, :category, :product_items, :id, :related_products)
 
   def initialize(attributes)
     @number = attributes.fetch(:number)
@@ -9,6 +9,11 @@ class Product
     @category = attributes.fetch(:category)
     @product_items = attributes.fetch(:product_items)
     @id = attributes.fetch(:id)
+    @related_products = attributes.fetch(:related_products)
+  end
+
+  def update_popularity
+    RestClient.put("http://localhost:3000/products/#{self.id}", nil)
   end
 
   def self.get_products(category)
@@ -28,7 +33,7 @@ class Product
   def self.get_product(id)
     product = HTTParty.get("http://localhost:3000/products/#{id}")["product"]
     product_items = HTTParty.get("http://localhost:3000/products/#{id}")["product_items"]
-    Product.new({id: product["id"], name: product["name"], number: product["number"], image: product["image"], description: product["description"], product_items: product_items, category: product["category"]})
+    Product.new({id: product["id"], name: product["name"], number: product["number"], image: product["image"], description: product["description"], product_items: product_items, category: product["category"], related_products: product["related_products"]})
   end
 
 end

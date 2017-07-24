@@ -1,25 +1,28 @@
 <p id="notice"><%= notice %></p>
 <h1 class="text-center">User Settings</h1>
 <h3>Customer Multipliers</h3>
-<table class="table table-bordered">
+<table id="mult-table" class="table table-bordered">
   <tr>
     <th>Category</th>
     <th>Multiplier</th>
   </tr>
   <tr>
     <td>Bedroom</td>
-    <td><%= @user["user"]["bedroom_mult"] %></td>
+    <td id="bedroom"><%= @user["user"]["bedroom_mult"] %></td>
+    <td><%= link_to("Edit", "/users/#{@user["user"]["id"]}/edit/bedroom", remote: true) %></td>
   </tr>
   <tr>
     <td>Seating</td>
     <td><%= @user["user"]["seating_mult"] %></td>
+    <td><%= link_to("Edit", edit_user_path(@user["user"]["id"] ), remote: true) %></td>
   </tr>
   <tr>
     <td>Dining</td>
     <td><%= @user["user"]["dining_mult"] %></td>
+    <td><%= link_to("Edit", edit_user_path(@user["user"]["id"]), remote: true) %></td>
   </tr>
 </table>
-
+<%= render "form" %>
 <h3>Customer Product Emails:</h3>
 <table class="table table-bordered">
   <tr>

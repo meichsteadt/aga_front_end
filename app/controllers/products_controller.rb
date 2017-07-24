@@ -1,8 +1,8 @@
 class ProductsController < ApplicationController
 
   def index
-    @products = Product.get_products(params[:category])
-    @category = params[:category]
+    @products = Product.get_products(params[:category_id])
+    @category = params[:category_id]
     if !params[:page]
       @page = 1
     else

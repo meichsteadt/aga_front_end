@@ -1,5 +1,5 @@
 <% content_for(:back_location) do %>
-  <%= link_to products_path(category: @category, page: @page) do %>
+  <%= link_to :back do %>
     <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
   <% end %>
 <% end %>
@@ -43,10 +43,25 @@
       </tr>
       <% end %>
     </table>
-    <%= submit_tag 'Submit', class:'btn btn-default', style: 'float:right;' %>
+    <%= submit_tag 'Get Price', class:'btn btn-default', style: 'float:right;' %>
     <% end %>
   </div>
   <div class="col-lg-4">
     <h2 id="total">Total: <%= number_to_currency(@sum) %></h2>
   </div>
+</div>
+
+<div class="related-products">
+  <% @product.related_products.pop while @product.related_products.length > 4 %>
+  <% @product.related_products.each do |id| %>
+    <% product = Product.get_product(id) %>
+    <%= link_to product_path(product.id) do%>
+      <div class="col-md-3 product">
+        <div class="image" style="background: url(<%= product.image %>); background-size: cover; background-position: center center;"></div>
+        <div class="info">
+          <p><%= product.name %></p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
 </div>

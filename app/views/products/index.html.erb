@@ -7,7 +7,7 @@
     <% @products.each_with_index do |product, index| %>
       <% if index < (6 * @page.to_i) && index >= (6 * (@page.to_i - 1)) %>
         <% if product["image"] != "https://www.homelegance.com/wp-content/themes/h2/images/misc/shim.gif" %>
-          <%= link_to product_path(product["id"], category: @category, page: @page) do%>
+          <%= link_to product_path(product["id"]) do%>
             <div class="col-lg-4 product">
               <div class="image" style="background: url(<%= product["image"] %>); background-size: cover; background-position: center center;"></div>
               <div class="info">
@@ -24,25 +24,25 @@
   <ul class="pagination">
     <li>
       <% if @page == '1' %>
-        <%= link_to products_path(page: (@products.length/6).ceil, category: @category) do %>
+        <%= link_to "/#{@category}/#{(@products.length/6).ceil}" do %>
           <span aria-hidden="true">&laquo;</span>
         <% end %>
       <% else %>
-        <%= link_to products_path(page: (@page.to_i-1), category: @category) do %>
+        <%= link_to "/#{@category}/#{(@page.to_i-1)}" do %>
           <span aria-hidden="true">&laquo;</span>
         <% end %>
       <% end %>
     </li>
     <% (@products.length/6).ceil.times do |time| %>
-      <li <%if @page.to_i == time+1 %> class="active" <% end %>><%= link_to (time+1), products_path(page: (time+1), category: @category) %></li>
+      <li <%if @page.to_i == time+1 %> class="active" <% end %>><%= link_to (time+1), "/#{@category}/#{(time+1)}" %></li>
     <% end %>
     <li>
       <% if @page.to_i == (@products.length/6).ceil %>
-        <%= link_to products_path(page: (1), category: @category) do %>
+        <%= link_to "/#{@category}/1" do %>
           <span aria-hidden="true">&raquo;</span>
         <% end %>
       <% else %>
-        <%= link_to products_path(page: (@page.to_i+1), category: @category) do %>
+        <%= link_to "/#{@category}/#{(@page.to_i+1)}" do %>
           <span aria-hidden="true">&raquo;</span>
         <% end %>
       <% end %>
