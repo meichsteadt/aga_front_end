@@ -26,7 +26,7 @@ class EmailsController < ApplicationController
   # POST /emails.json
   def create
     @email = Email.new(email_params)
-    email = @email.send_email
+    email = @email.send_email(session[:user]["user"]["id"])
     session[:user]["emails"].push(JSON.parse(email))
     respond_to do |format|
       format.js
