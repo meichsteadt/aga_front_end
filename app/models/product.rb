@@ -13,14 +13,14 @@ class Product
   end
 
   def update_popularity
-    RestClient.put("http://localhost:3000/products/#{self.id}", nil)
+    RestClient.put("https://aga-api.herokuapp.com/products/#{self.id}", nil)
   end
 
   def self.get_products(category)
     if category == nil
       category = "products"
     end
-    products = HTTParty.get("http://localhost:3000/#{category}").sort_by {|prod| prod["popularity"]}.reverse!
+    products = HTTParty.get("https://aga-api.herokuapp.com/#{category}").sort_by {|prod| prod["popularity"]}.reverse!
     returned_products = []
     products.each do |prod|
       if prod["image"] != "https://www.homelegance.com/wp-content/themes/h2/images/misc/shim.gif"
@@ -31,8 +31,8 @@ class Product
   end
 
   def self.get_product(id)
-    product = HTTParty.get("http://localhost:3000/products/#{id}")["product"]
-    product_items = HTTParty.get("http://localhost:3000/products/#{id}")["product_items"]
+    product = HTTParty.get("https://aga-api.herokuapp.com/products/#{id}")["product"]
+    product_items = HTTParty.get("https://aga-api.herokuapp.com/products/#{id}")["product_items"]
     Product.new({id: product["id"], name: product["name"], number: product["number"], image: product["image"], description: product["description"], product_items: product_items, category: product["category"], related_products: product["related_products"]})
   end
 

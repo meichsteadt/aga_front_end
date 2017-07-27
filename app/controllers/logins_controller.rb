@@ -7,7 +7,7 @@ class LoginsController < ApplicationController
   def create
     @user = User.get_user(params[:login][:login], params[:login][:password])
     session[:user] = @user
-    redirect_to "/users/#{session[:user]['user']['id']}"
+    redirect_to "/"
   end
 
 private

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :logins
   get "/login", to: "logins#new"
   get "users/:id/edit/:category", to: "users#edit"
+  get "users/edit", to: "users#show"
   root 'splash#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
